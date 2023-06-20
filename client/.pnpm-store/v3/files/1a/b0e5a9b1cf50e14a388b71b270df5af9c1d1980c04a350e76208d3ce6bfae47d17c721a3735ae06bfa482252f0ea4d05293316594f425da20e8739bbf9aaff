@@ -1,0 +1,44 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var defineProperty = require('../../../../dist/defineProperty-21d22449.cjs.dev.js');
+var evm_wallets_base_dist_thirdwebDevWalletsEvmWalletsBase = require('../../../../dist/base-aeb9f8fe.cjs.dev.js');
+var twConnector = require('../../../../dist/tw-connector-7917f56a.cjs.dev.js');
+require('../../../../dist/classPrivateMethodGet-13694527.cjs.dev.js');
+require('../../../../dist/checkPrivateRedeclaration-09e2947a.cjs.dev.js');
+require('../../abstract/dist/thirdweb-dev-wallets-evm-wallets-abstract.cjs.dev.js');
+require('ethers');
+require('eventemitter3');
+require('@thirdweb-dev/chains');
+
+class InjectedWallet extends evm_wallets_base_dist_thirdwebDevWalletsEvmWalletsBase.AbstractBrowserWallet {
+  get walletName() {
+    return "Injected Wallet";
+  }
+  constructor(options) {
+    super(InjectedWallet.id, options);
+    defineProperty._defineProperty(this, "connector", void 0);
+    defineProperty._defineProperty(this, "connectorStorage", void 0);
+    this.connectorStorage = options.connectorStorage || evm_wallets_base_dist_thirdwebDevWalletsEvmWalletsBase.createAsyncLocalStorage("connector");
+  }
+  async getConnector() {
+    if (!this.connector) {
+      // import the connector dynamically
+      const {
+        InjectedConnector
+      } = await Promise.resolve().then(function () { return require('../../../connectors/injected/dist/thirdweb-dev-wallets-evm-connectors-injected.cjs.dev.js'); });
+      this.connector = new twConnector.WagmiAdapter(new InjectedConnector({
+        chains: this.chains,
+        connectorStorage: this.connectorStorage,
+        options: {
+          shimDisconnect: true
+        }
+      }));
+    }
+    return this.connector;
+  }
+}
+defineProperty._defineProperty(InjectedWallet, "id", "injected");
+
+exports.InjectedWallet = InjectedWallet;

@@ -1,0 +1,40 @@
+import { _ as _defineProperty } from '../../../../dist/defineProperty-e24c82ea.esm.js';
+import { a as AbstractBrowserWallet, c as createAsyncLocalStorage } from '../../../../dist/base-ef656574.esm.js';
+import { W as WagmiAdapter } from '../../../../dist/tw-connector-d83550c7.esm.js';
+import '../../../../dist/classPrivateMethodGet-fb5087d9.esm.js';
+import '../../../../dist/checkPrivateRedeclaration-a6ec2e61.esm.js';
+import '../../abstract/dist/thirdweb-dev-wallets-evm-wallets-abstract.esm.js';
+import 'ethers';
+import 'eventemitter3';
+import '@thirdweb-dev/chains';
+
+class InjectedWallet extends AbstractBrowserWallet {
+  get walletName() {
+    return "Injected Wallet";
+  }
+  constructor(options) {
+    super(InjectedWallet.id, options);
+    _defineProperty(this, "connector", void 0);
+    _defineProperty(this, "connectorStorage", void 0);
+    this.connectorStorage = options.connectorStorage || createAsyncLocalStorage("connector");
+  }
+  async getConnector() {
+    if (!this.connector) {
+      // import the connector dynamically
+      const {
+        InjectedConnector
+      } = await import('../../../connectors/injected/dist/thirdweb-dev-wallets-evm-connectors-injected.esm.js');
+      this.connector = new WagmiAdapter(new InjectedConnector({
+        chains: this.chains,
+        connectorStorage: this.connectorStorage,
+        options: {
+          shimDisconnect: true
+        }
+      }));
+    }
+    return this.connector;
+  }
+}
+_defineProperty(InjectedWallet, "id", "injected");
+
+export { InjectedWallet };

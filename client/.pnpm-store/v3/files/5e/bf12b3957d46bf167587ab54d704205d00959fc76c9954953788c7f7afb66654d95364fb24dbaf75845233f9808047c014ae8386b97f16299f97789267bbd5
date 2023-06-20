@@ -1,0 +1,16 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+require('../../../../dist/classPrivateMethodGet-13694527.cjs.dev.js');
+require('../../../../dist/defineProperty-21d22449.cjs.dev.js');
+var evm_wallets_base_dist_thirdwebDevWalletsEvmWalletsBase = require('../../../../dist/base-aeb9f8fe.cjs.dev.js');
+require('../../abstract/dist/thirdweb-dev-wallets-evm-wallets-abstract.cjs.dev.js');
+require('@thirdweb-dev/chains');
+require('../../../../dist/checkPrivateRedeclaration-09e2947a.cjs.dev.js');
+require('ethers');
+require('eventemitter3');
+
+
+
+exports.AbstractBrowserWallet = evm_wallets_base_dist_thirdwebDevWalletsEvmWalletsBase.AbstractBrowserWallet;
