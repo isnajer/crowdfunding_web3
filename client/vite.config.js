@@ -1,4 +1,4 @@
-import react from "@vitejs/plugin-react";
+import react from '@vitejs/plugin-react-refresh';
 import { defineConfig } from "vite";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
