@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
 contract CrowdFunding {
@@ -10,7 +10,7 @@ contract CrowdFunding {
         uint256 deadline;
         uint256 amountCollected;
         string image;
-        address[] donors;
+        address[] donators;
         uint256[] donations;
     }
 
@@ -55,7 +55,7 @@ contract CrowdFunding {
 
         Campaign storage campaign = campaigns[_id];
 
-        campaign.donors.push(msg.sender);
+        campaign.donators.push(msg.sender);
         campaign.donations.push(amount);
 
         (bool sent, ) = payable(campaign.owner).call{value: amount}("");
@@ -65,10 +65,10 @@ contract CrowdFunding {
         }
     }
 
-    function getDonors(
+    function getDonators(
         uint256 _id
     ) public view returns (address[] memory, uint256[] memory) {
-        return (campaigns[_id].donors, campaigns[_id].donations);
+        return (campaigns[_id].donators, campaigns[_id].donations);
     }
 
     function getCampaigns() public view returns (Campaign[] memory) {

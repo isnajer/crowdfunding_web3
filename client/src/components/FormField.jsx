@@ -4,7 +4,7 @@ const FormField = ({ labelName, placeholder, inputType, isTextArea, value, handl
   return (
     <label className='flex-1 w-full flex flex-col'>
       {labelName && (
-        <span className='font-epilogue font-medium text-[14px] leading-[22px] text-[#3a3a43] mb=[10px]'>{labelName}</span>
+        <span className='font-epilogue font-medium text-[14px] leading-[22px] text-[#3a3a43] mb-[5px]'>{labelName}</span>
       )}
       {isTextArea ? (
         <textarea 

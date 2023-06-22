@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ethers } from 'ethers';
 
+import { useStateContext } from '../context';
 import { money } from '../assets';
 import { CustomButton, FormField } from '../components';
 import { checkIfImage } from '../utils';
@@ -9,7 +10,8 @@ import { checkIfImage } from '../utils';
 const CreateCampaign = () => {
   const navigate = useNavigate();
   const [isLoading, setisLoading] = useState(false);
-  const [form, setform] = useState({
+  const { createCampaign } = useStateContext();
+  const [form, setForm] = useState({
     name: '',
     title: '',
     description: '',
@@ -19,13 +21,23 @@ const CreateCampaign = () => {
   });
 
   const handleFormFieldChange = (fieldName, e) => {
-    setform({ ...form, [fieldName]: e.target.value })
+    setForm({ ...form, [fieldName]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(form);
+    checkIfImage(form.image, async (exists) => {
+      if(exists) {
+        setisLoading(true)
+        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
+        setisLoading(false);
+        navigate('/');
+      } else {
+        alert('Provide validimage URL')
+        setForm({ ...form, image: ''});
+      }
+    })
   }
 
   return (
@@ -35,7 +47,7 @@ const CreateCampaign = () => {
         <h1 className='justify-center items-center sm:text-[25px] text-[18px] leading-[38px] font-epilogue font-bold text-[#3a3a43]'>Start a New Campaign!</h1>
       </div>
 
-      <form onSubmit={handleSubmit} className='w-full mt-[65px] flex flex-col gap-[30px]'>
+      <form onSubmit={handleSubmit} className='w-full mt-[20px] flex flex-col gap-[30px]'>
       <div className='flex flex-wrap gap-[40px]'>
         <FormField 
           labelName='Your Name *'
@@ -59,6 +71,7 @@ const CreateCampaign = () => {
         isTextArea
         value={form.description}
         handleChange={(e) => handleFormFieldChange('description', e)}
+        className='mb-[5px]'
       />
 
       <div className='w-full flex justfify-center items-center p-4'>
@@ -93,7 +106,7 @@ const CreateCampaign = () => {
           handleChange={(e) => handleFormFieldChange('image', e)}
         />   
 
-      <div className='flex justify-center items-center mt-[30px]'>
+      <div className='flex justify-center items-center mt-[20px]'>
         <CustomButton 
           btnType="submit"
           title="Submit new campaign"
