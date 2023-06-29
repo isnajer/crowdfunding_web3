@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { useLoaderData, useLocation } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { ethers } from 'ethers';
 
 import { useStateContext } from '../context';
-import { CustomButton, CountBox } from '../components';
+import { CustomButton, CountBox, Loader} from '../components';
 import { calculateBarPercentage, daysLeft } from '../utils';
 import { thirdweb } from '../assets';
 
 const CampaignDetails = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
   const { donate, getDonations, contract, address } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -32,13 +33,14 @@ const CampaignDetails = () => {
 
     await donate(state.pId, amount);
 
+    navigate('/')
     isLoading(false);
     
   }
 
   return (
     <div>
-      {isLoading && 'Loading...'}
+      {isLoading && <Loader />}
       <div className='bg-[#FFF8E7] flex justify-center flex-col rounded-[10px] sm:p-10 p-4'>
       <div className='w-full flex md:flex-row flex-col mt-10 gap-[30px]'>
         <div className='flex-1 flex-col'>
@@ -82,16 +84,18 @@ const CampaignDetails = () => {
           </div>
 
           <div>
-            <h4 className='font-epilogue font-semibold text-[18px] text-[#00000] bg-[#FEDE6D] truncate uppercase'>Donators</h4>
-            <div className='mt-[20px] flex flex-col gap-4'>
-              {donators.length > 0 ? donators.map((item, index) => (
-                <div>
-                  DONATOR
-                </div>
-              )) : (
-                <p className='font-epilogue font-normal text-[14px] text-[#00000] leading-[26px] text-justify'>No donators yet. Be the first one!</p>
-              )}
-            </div>
+            <h4 className="font-epilogue font-semibold text-[18px] text-[#00000] bg-[#FEDE6D] uppercase">Donators</h4>
+
+              <div className="mt-[20px] flex flex-col gap-4">
+                {donators.length > 0 ? donators.map((item, index) => (
+                  <div key={`${item.donator}-${index}`} className="flex justify-between items-center gap-4">
+                    <p className="font-epilogue font-normal text-[14px] text-[#00000] leading-[26px] break-ll">{index + 1}. {item.donator}</p>
+                    <p className="font-epilogue font-normal text-[14px] text-[#00000] leading-[26px] break-ll">{item.donation}</p>
+                  </div>
+                )) : (
+                  <p className="font-epilogue font-normal text-[14px] text-[#00000] leading-[26px] text-justify">No donators yet. Be the first one!</p>
+                )}
+              </div>
           </div>
         </div>
         
