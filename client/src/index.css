@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-  background-color: #E5623A;
+  background: linear-gradient(45deg, hsla(335, 91%, 70%, 1) 0%, hsla(49, 89%, 61%, 1) 100%);
 }
 
 .linear-gradient {

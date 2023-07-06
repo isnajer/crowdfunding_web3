@@ -41,7 +41,7 @@ const CreateCampaign = () => {
   }
 
   return (
-    <div className='bg-[#FFF8E7] flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4'>
+    <div className='bg-[#FFF8E7] flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-1'>
       {isLoading && <Loader />}
       <div className='flex justify-center items-center p-[16px] sm:min-w-[380px] bg-transparent rounded-[10px]'>
         <h1 className='justify-center items-center sm:text-[25px] text-[18px] leading-[38px] font-epilogue font-bold text-[#3a3a43]'>Start a New Campaign!</h1>

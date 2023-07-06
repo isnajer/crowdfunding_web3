@@ -15,8 +15,8 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
   console.log('Has duplicate IDs:', hasDuplicates);
 
   return (
-    <div className='bg-[#FFF8E7] flex justify-center flex-col rounded-[10px] sm:p-10 p-4'>
-        <h1 className='text-[18px] font-bold text-[#3a3a43]  font-epilogue text-left'>{title} ({campaigns.length})</h1>
+    <div className='flex justify-center flex-col rounded-[10px] sm:p-10 p-4'>
+        <h1 className='text-[18px] font-semibold text-white  font-epilogue text-left'>{title} ({campaigns.length})</h1>
 
         <div className='flex flex-wrap mt-[20px] gap-[26px]'>
             {isLoading && (

@@ -27,23 +27,23 @@ const Navbar = () => {
         <CustomButton 
           btnType="button"
           title={address ? 'Create a campaign' : 'Connect'}
-          styles={address ? 'bg-[#FEDE6D]' : 'bg-[#8c6dfd]'}
+          styles={address ? 'bg-white' : 'bg-white'}
           handleClick={() => {
             if(address) navigate('create-campaign')
             else connect()
           }}
           />
 
-          {/* <Link>
-            <div className='w-[52px] h-[52px] rounded-full bg-[#FFF8E7] flex justify-center items-center cursor-pointer'>
-              <img src={thirdweb} alt='user' className='w-[60%] h-[60%] object-contain'/>
+          <Link>
+            <div className='w-[55px] h-[55px] rounded-full bg-[#FFF8E7] flex justify-center items-center cursor-pointer'>
+              <img src={thirdweb} alt='user' className='w-[100%] h-[100%] object-contain'/>
             </div>
-          </Link> */}
+          </Link>
       </div>
       {/* Small screen navigation */}
           <div className='sm:hidden flex justify-between items-center relative'>
-            <div className='w-[40px] h-[40px] rounded-[10px] bg-[#FFF8E7] flex justify-center items-center cursor-pointer'>
-            <img src={logo} alt='user' className='w-[60%] h-[60%] object-contain'/>
+            <div className='w-[50px] h-[50px] rounded-full bg-[#FFF8E7] flex justify-center items-center cursor-pointer'>
+            <img src={thirdweb} alt='user' className='w-[100%] h-[100%] object-contain'/>
             </div>
 
             <img 

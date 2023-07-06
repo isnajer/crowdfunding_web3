@@ -42,35 +42,35 @@ const CampaignDetails = () => {
     <div>
       {isLoading && <Loader />}
       <div className='bg-[#FFF8E7] flex justify-center flex-col rounded-[10px] sm:p-10 p-4'>
-      <div className='w-full flex md:flex-row flex-col mt-10 gap-[30px]'>
+      <div className='w-full flex md:flex-row flex-col mt-5 gap-[30px]'>
         <div className='flex-1 flex-col'>
           <img src={state.image} alt='campaign' className='w-full h-[410px] object-cover rounded-xl'/>
-          <div className='relative w-full h-[5px] bg-[#FEDE6D] mt-2'>
+          <div className='relative w-full h-[10px] mt-1'>
             <div className='absolute h-full bg-[#6BB176]' style={{ width: `${calculateBarPercentage(state.target, state.amountCollected)}%`, maxWidth: '100%'}}>
             </div>
           </div>
         </div>
 
-        <div className='flex md:w-[150px] w-full flex-wrap justify-between gap-[30px]'>
+        <div className='flex md:w-[150px] w-full flex-wrap justify-between gap-[20px]'>
           <CountBox title='Days Left' value={remainingDays} />
           <CountBox title={`Raised of ${state.target}`} value={state.amountCollected} />
           <CountBox title='Total Donors' value={donators.length} />
         </div>
       </div>
       
-      <div className='mt-[60px] flex lg:flex-row flex-col gap-5'>
+      <div className='mt-[30px] flex lg:flex-row flex-col gap-5'>
         <div className='flex-[2] flex flex-col gap-[40px]'>
           <div>
             <h4 className='font-epilogue font-semibold text-[18px] text-[#00000] bg-[#FEDE6D] truncate uppercase'>Creator</h4>
 
             <div className='mt-[20px] flex flex-row flex-wrap gap-[14px]'>
-              <div className='2-[52px] h-[52px] flex items-center justify-center rounded-full cursor-pointer'>
-                <img src={thirdweb} alt='user' className='w-[60%] h-[60%] object-contain'/>
+              <div className='w-[80px] h-[80px] flex items-center justify-center rounded-full cursor-pointer'>
+                <img src={thirdweb} alt='user' className='w-[100%] h-[100%] object-contain'/>
               </div>
 
               <div>
-                <h4 className='font-epilogue font-seminold text-[14px] text-[#00000] break-all'>{state.owner}</h4>
-                <p className='mt-[4px] font-epilogue font-normal text-[12px] text-[#00000]'>10 Campaings</p>
+                <h4 className='font-epilogue font-normal text-[15px] text-[#00000] mt-[18px] break-all'>{state.owner}</h4>
+                {/* <p className='mt-[4px] font-epilogue font-normal text-[12px] text-[#00000]'>10 Campaings</p> */}
               </div>
 
             </div>
